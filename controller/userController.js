@@ -25,6 +25,13 @@ exports.userGetById= async(req, res)=>{
       res.send(err)
    }
 }
+exports.userGetByEmail = async (req, res) => {
+  try {
+    res.send({ data: await getUserbyidQuery(req) });
+  } catch (err) {
+    res.send(err);
+  }
+};
 exports.userDelete=async(req, res)=>{
  try {
     res.send({data: await deleteUserQuery(req)})

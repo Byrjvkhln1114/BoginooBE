@@ -17,6 +17,11 @@ exports.getUserbyidQuery= async (req)=>{
     const result = await User.findById({_id:uid})
     return result
 }
+exports.getUserbyidQuery = async (req) => {
+  const { email } = req.params;
+  const result = await User.findOne({ email: email });
+  return result;
+};
 exports.deleteUserQuery= async(req)=>{
     const {uid}= req.body;
     const result = await User.deleteOne({_id:uid})
