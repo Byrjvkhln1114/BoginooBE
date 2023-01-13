@@ -48,19 +48,3 @@ exports.UserUpdate = async (req, res) => {
     res.send(err);
   }
 };
-exports.Userlogin = async (req, res) => {
-  const { password, email } = req.body;
-  const user = await User.findOne({ email: email });
-  if (!user) res.send(" You don't have any user account, please sign up ");
-  if (user.password === password) {
-    const token = await TokenGenerator({
-      user: user,
-      expires: 1200,
-    });
-    res.send(token);
-    return;
-  } else {
-    res.send("Wrong password");
-    return;
-  }
-};
