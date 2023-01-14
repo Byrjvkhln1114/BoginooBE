@@ -1,7 +1,12 @@
-const {createUserQuery, getUserQuery, getUserbyidQuery, deleteUserQuery, updateUserQuery}= require("../query/userQuery")
-const _= require("lodash")
+const {
+  createUserQuery,
+  getUserQuery,
+  getUserbyidQuery,
+  deleteUserQuery,
+  updateUserQuery,
+} = require("../query/userQuery");
+const _ = require("lodash");
 const { TokenGenerator } = require("../helper/helper");
-const User = require("../database/model/user");
 exports.userCreator = async (req, res) => {
   try {
     await createUserQuery(req);
