@@ -1,7 +1,14 @@
 const express = require("express");
 const UserRouter = express.Router();
 const { userMiddleware } = require("../middleware");
-const { UserdataChecker, createURL } = require("../query/userQuery");
+const {
+  UserdataChecker,
+  createURL,
+  UrlCarrier,
+  urlAllDelete,
+  UrlHistory,
+} = require("../query/userQuery");
+const { authorizer } = require("../authorizer/authorization");
 const {
   userCreator,
   userGeter,
@@ -11,9 +18,12 @@ const {
 } = require("../controller/userController");
 UserRouter.put("/users", UserUpdate)
   .get("/users", userGeter)
+  .get("/url/:shortUrl", UrlCarrier)
+  .get("/UrlHistory/:uid", UrlHistory)
   .get("/users", userGetById)
   .post("/users", userCreator)
   .delete("/users", userDelete)
+  .delete("/urlAllDelete", urlAllDelete)
   .post("/login", UserdataChecker)
   .post("/bla", createURL);
 module.exports = UserRouter;

@@ -12,9 +12,10 @@ exports.createUserQuery = async (req) => {
   return result;
 };
 exports.createURL = async (req, res) => {
-  const { full } = req.body;
+  const { full, uid } = req.body;
   const result = await new Url({
     full: full,
+    uid: uid,
   }).save();
   res.send(result);
 };
@@ -49,11 +50,25 @@ exports.UserdataChecker = async (req, res) => {
   const a = await bcrypt.compare(password, bla.password);
   if (bla) {
     if (a === true) {
-      res.send("Success logged");
+      res.send(["Success logged", bla._id, bla.email.split("@")[0]]);
     } else {
       res.send("wrong password ");
     }
   } else {
     res.send("YOU dnt have userat this email");
   }
+};
+exports.UrlCarrier = async (req, res) => {
+  const { shortUrl } = req.params;
+  const result = await Url.findOne({ short: shortUrl });
+  result.full ? res.redirect(result.full) : res.send("invalid url");
+};
+exports.urlAllDelete = async (req, res) => {
+  const result = await Url.deleteMany({});
+  res.send(result);
+};
+exports.UrlHistory = async (req, res) => {
+  const { uid } = req.params;
+  const result = await Url.find({ uid: uid });
+  res.send(result);
 };

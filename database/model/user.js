@@ -13,6 +13,7 @@ const Users = new mongoose.Schema({
   },
   email: { type: String, required: [true, "Email is required"] },
   createdAt: { type: Date, default: Date.now() },
+  admin: { type: Boolean },
 });
 const UsersModel= mongoose.model("Users", Users);
 module.exports= UsersModel;
