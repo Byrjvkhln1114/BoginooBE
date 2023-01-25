@@ -13,7 +13,7 @@ const Urls = new mongoose.Schema({
   },
   uid: {
     type: String,
-    required: true,
+    // required: true,
   },
   createdAt: { type: Date, default: Date.now() },
 });

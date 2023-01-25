@@ -1,6 +1,7 @@
 const User = require("../database/model/user");
 const Url = require("../database/model/url");
 const bcrypt = require("bcrypt");
+const { TokenGenerator } = require("../helper/helper");
 exports.createUserQuery = async (req) => {
   const { password, email } = req.body;
   const salt = bcrypt.genSaltSync(1);
@@ -48,9 +49,10 @@ exports.UserdataChecker = async (req, res) => {
   const { email, password } = req.body;
   const bla = await User.findOne({ email: email });
   const a = await bcrypt.compare(password, bla.password);
+  const token = await TokenGenerator({ result: bla, expires: 300 });
   if (bla) {
     if (a === true) {
-      res.send(["Success logged", bla._id, bla.email.split("@")[0]]);
+      res.send(["Success logged", bla._id, bla.email.split("@")[0], token]);
     } else {
       res.send("wrong password ");
     }

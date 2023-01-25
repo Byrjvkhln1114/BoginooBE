@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
-exports.TokenGenerator = async ({ user, expires }) => {
-  return await jwt.sign({ user: user }, process.env.JWT || "lol999za", {
+exports.TokenGenerator = async ({ result, expires }) => {
+  return await jwt.sign({ result: result }, process.env.JWT || "lol999za", {
     expiresIn: expires,
   });
 };

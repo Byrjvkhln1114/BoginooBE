@@ -10,7 +10,7 @@ app.use(UserRouter);
 const startServer = async () => {
   await connectDatabase();
   app.listen(port, () => {
-    console.log(`server on protocol ${port} `);
+    console.log(`server on protosscol ${port} `);
   });
 };
 startServer();
