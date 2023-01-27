@@ -18,7 +18,7 @@ const {
 } = require("../controller/userController");
 UserRouter.put("/users", UserUpdate)
   .get("/users", userGeter)
-  .get("/url/:shortUrl", UrlCarrier)
+  .get("/:shortUrl", UrlCarrier)
   .get("/UrlHistory/:uid", UrlHistory)
   .get("/users", userGetById)
   .post("/users", userCreator)
