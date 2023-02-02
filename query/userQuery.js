@@ -48,9 +48,10 @@ exports.updateUserQuery = async (req) => {
 exports.UserdataChecker = async (req, res) => {
   const { email, password } = req.body;
   const bla = await User.findOne({ email: email });
-  const a = await bcrypt.compare(password, bla.password);
-  const token = await TokenGenerator({ result: bla, expires: 300 });
+ 
   if (bla) {
+    const a = await bcrypt.compare(password, bla.password);
+    const token = await TokenGenerator({ result: bla, expires: 300 });
     if (a === true) {
       res.send(["Success logged", bla._id, bla.email.split("@")[0], token]);
     } else {
