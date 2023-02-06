@@ -17,7 +17,6 @@ const {
   userDelete,
 } = require("../controller/userController");
 UserRouter.put("/users", UserUpdate)
-  .get("/users", userGeter)
   .get("/:shortUrl", UrlCarrier)
   .get("/UrlHistory/:uid", UrlHistory)
   .get("/users", userGetById)

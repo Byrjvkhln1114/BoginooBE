@@ -39,10 +39,14 @@ exports.deleteUserQuery = async (req) => {
   const result = await User.deleteOne({ _id: uid });
   return result;
 };
-exports.updateUserQuery = async (req) => {
-  const { change, value, uid } = req.body;
-  let result = "";
-  result = await User.findByIdAndUpdate({ _id: uid }, { [change]: value });
+exports.updateUserQuery = async (req, res) => {
+  const { password, email } = req.body;
+  const salt = bcrypt.genSaltSync(1);
+  const hash = bcrypt.hashSync(password, salt);
+  const result = await User.findOneAndUpdate(
+    { email: email },
+    { password: hash }
+  );
   return result;
 };
 exports.UserdataChecker = async (req, res) => {
