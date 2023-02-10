@@ -12,17 +12,17 @@ const { authorizer } = require("../authorizer/authorization");
 const {
   userCreator,
   userGeter,
-  userGetById,
+
   UserUpdate,
   userDelete,
 } = require("../controller/userController");
 UserRouter.put("/users", UserUpdate)
-  .get("/:shortUrl", UrlCarrier)
+  .get("/allusers", userGeter)
   .get("/UrlHistory/:uid", UrlHistory)
-  .get("/users", userGetById)
   .post("/users", userCreator)
   .delete("/users", userDelete)
   .delete("/urlAllDelete", urlAllDelete)
   .post("/login", UserdataChecker)
-  .post("/bla", createURL);
+  .post("/bla", createURL)
+  .get("/:shortUrl", UrlCarrier);
 module.exports = UserRouter;

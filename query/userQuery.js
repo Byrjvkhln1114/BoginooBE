@@ -68,7 +68,7 @@ exports.UserdataChecker = async (req, res) => {
 exports.UrlCarrier = async (req, res) => {
   const { shortUrl } = req.params;
   const result = await Url.findOne({ short: shortUrl });
-  result.full ? res.redirect(result.full) : res.send("invalid url");
+  result?.full ? res.redirect(result.full) : res.send("invalid url");
 };
 exports.urlAllDelete = async (req, res) => {
   const result = await Url.deleteMany({});
